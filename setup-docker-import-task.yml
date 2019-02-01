@@ -18,7 +18,8 @@ run:
   - "-c"
   - |
     set -eux
-    mkdir -p docker-image/image
-    cp -r platform-automation-image docker-image/image
-    cp platform-automation-image/repository docker-image/repository
-    cp platform-automation-image/tag docker-image/tag
+    TARBALL=platform-automation-image/$(basename $(find platform-automation-image/platform-automation-image*.tgz | head -n 1))
+    cp -r $TARBALL docker-image/image
+    cd docker-image
+    tar -xf $TARBALL repository tag
+    

@@ -34,7 +34,6 @@ jobs:
       resource: platform-automation-resource
       params:
         globs: [ "platform-automation-image*.tgz" ]
-        unpack: true
 
     - task: setup-docker-import
       file: customizations/setup-docker-import-task.yml
