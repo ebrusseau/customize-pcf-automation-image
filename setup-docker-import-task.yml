@@ -6,11 +6,11 @@ image_resource:
   source: {repository: ubuntu}
 
 inputs:
-  - customizations
-  - platform-automation-image
+  - name: customizations
+  - name: platform-automation-image
 
 outputs:
-  - docker-image
+  - name: docker-image
 
 run:
   path: bash
