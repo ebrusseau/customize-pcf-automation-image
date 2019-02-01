@@ -37,5 +37,4 @@ jobs:
     - put: custom-image
       params:
         load_file: platform-automation-image
-        load_repository: platform-automation
         build: customizations
