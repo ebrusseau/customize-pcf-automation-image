@@ -19,5 +19,5 @@ run:
   - |
     set -eux
     TARBALL=platform-automation-image/$(basename $(find platform-automation-image/platform-automation-image*.tgz | head -n 1))
+    tar -C docker-image/ -xzf $TARBALL repository tag
     cp -r $TARBALL docker-image/image
-    tar -C docker-image -xzf $TARBALL repository tag
