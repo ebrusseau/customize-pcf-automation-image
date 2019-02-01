@@ -1,0 +1,38 @@
+---
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
+resources:
+- name: platform-automation-resource
+  type: pivnet
+  source:
+    api_token: {{api-token}}
+    product_slug: platform-automation
+
+- name: customizations
+  type: git
+  source:
+    repository: https://github.com/ebrusseau/customize-pcf-automation-image
+
+- name: custom-image
+  type: docker-image
+  source:
+    repository: ebrusseau/custom-pcf-automation
+
+jobs:
+- name: customize-image-from-base
+  plan:
+    - get: platform-automation-image
+      resource: platform-automation-resource
+      params:
+        globs: [ "platform-automation-image*.tgz" ]
+        unpack: true
+    - get: customizations
+    - put: custom-image
+      params:
+        load_base: platform-automation-image
+        dockerfile: customizations/Dockerfile
