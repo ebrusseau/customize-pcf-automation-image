@@ -26,7 +26,7 @@ resources:
     password: {{docker-password}}
 
 jobs:
-- name: customize-image-from-base
+- name: customize-image
   plan:
     - get: platform-automation-image
       resource: platform-automation-resource
@@ -36,5 +36,7 @@ jobs:
     - get: customizations
     - put: custom-image
       params:
-        load_base: platform-automation-image
+        load_file: platform-automation-image
+        load_repository: platform-image
+        load_tag: latest
         build: customizations
