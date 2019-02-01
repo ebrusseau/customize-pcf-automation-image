@@ -37,7 +37,7 @@ jobs:
         unpack: true
 
     - task: setup-docker-import
-      file: setup-docker-import-task.yml
+      file: customizations/setup-docker-import-task.yml
 
     - put: custom-image
       params:
