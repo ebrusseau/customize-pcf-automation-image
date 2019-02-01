@@ -1,0 +1,24 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: ubuntu}
+
+inputs:
+  - customizations
+  - platform-automation-image
+
+outputs:
+  - docker-image
+
+run:
+  path: bash
+  args:
+  - "-c"
+  - |
+    set -eux
+    mkdir -p docker-image/image
+    cp -r platform-automation-image docker-image/image
+    cp platform-automation-image/repository docker-image/repository
+    cp platform-automation-image/tag docker-image/tag
