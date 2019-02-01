@@ -29,14 +29,17 @@ resources:
 jobs:
 - name: customize-image
   plan:
+    - get: customizations
     - get: platform-automation-image
       resource: platform-automation-resource
       params:
         globs: [ "platform-automation-image*.tgz" ]
         unpack: true
 
-    - get: customizations
+    - task: setup-docker-import
+      file: setup-docker-import-task.yml
+
     - put: custom-image
       params:
-        cache_from: platform-automation-image
+        load_base: docker-image
         build: customizations
