@@ -10,18 +10,20 @@ resources:
 - name: platform-automation-resource
   type: pivnet
   source:
-    api_token: {{api-token}}
+    api_token: {{pivnet-token}}
     product_slug: platform-automation
 
 - name: customizations
   type: git
   source:
-    repository: https://github.com/ebrusseau/customize-pcf-automation-image
+    uri: https://github.com/ebrusseau/customize-pcf-automation-image.git
 
 - name: custom-image
   type: docker-image
   source:
     repository: ebrusseau/custom-pcf-automation
+    username: {{docker-username}}
+    password: {{docker-password}}
 
 jobs:
 - name: customize-image-from-base
@@ -34,5 +36,6 @@ jobs:
     - get: customizations
     - put: custom-image
       params:
-        load_base: platform-automation-image
-        dockerfile: customizations/Dockerfile
+        load_file: platform-automation-image
+        load_repository: platform-automation
+        build: customizations
