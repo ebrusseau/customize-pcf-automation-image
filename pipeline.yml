@@ -32,10 +32,11 @@ jobs:
     - get: platform-automation-image
       resource: platform-automation-resource
       params:
-        globs: [ "platform-automation-image-2.1.0-beta.1.tgz" ]
+        globs: [ "platform-automation-image*.tgz" ]
+        unpack: true
 
     - get: customizations
     - put: custom-image
       params:
-        import_file: platform-automation-image/platform-automation-image-2.1.0-beta.1.tgz
+        cache_from: platform-automation-image
         build: customizations

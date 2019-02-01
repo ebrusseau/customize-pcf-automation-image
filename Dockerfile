@@ -1,4 +1,4 @@
-FROM ebrusseau/custom-pcf-automation:latest
+FROM internalpcfplatformautomation/platform-automation:testing
 
 RUN apt-get update && apt-get install -y \
   jq
